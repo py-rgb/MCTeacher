@@ -1,4 +1,3 @@
-``` LIUNX
 ​``` LIUNX
 $ mkdir bert_en
 $ cd bert_en
