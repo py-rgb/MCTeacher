@@ -312,11 +312,8 @@ class V1_Semi():
                     memory_dataloader = self.get_bank() 
                     with tqdm(memory_dataloader) as td:
                         for feature_t, feature_s in td:
-                            feature_T = F.relu(model.Model.thernet_1(feature_t), inplace=True)
-                            feature_T = model.Model.thernet_2(feature_T)
-                            feature_s = self.post_fusion_dropout(feature_s)
-                            feature_S = F.relu(model.Model.thernet_1(feature_s), inplace=True)
-                            feature_S = model.Model.thernet_2(feature_S)
+                            feature_T = model.Model.thernet_2(F.relu(model.Model.thernet_1(feature_t), inplace=True))
+                            feature_S = model.Model.thernet_2(F.relu(model.Model.thernet_1(feature_s), inplace=True))
                             Lu = self.softmax_kl_loss(feature_T,feature_S)
                             Lu.backward()
                             optimizer_thernet.step()
